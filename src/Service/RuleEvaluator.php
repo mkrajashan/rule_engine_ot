@@ -9,11 +9,26 @@ use Symfony\Component\Notifier\NotifierInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
 
+/**
+ * Evaluates scan results and triggers alerts based on hardcoded business rules.
+ *
+ * Example: Alert when vulnerabilities are found in a scan result.
+ *
+ * @package App\Service
+ */
 class RuleEvaluator
 {
     private const HIGH_SEVERITY_THRESHOLD = 7.0;
     private const CRITICAL_VULN_COUNT = 5;
 
+    /**
+     * @var NotifierInterface Used to notify users when rules are triggered.
+     */
+    /**
+     * RuleEvaluator constructor.
+     *
+     * @param NotifierInterface $notifier
+     */
     public function __construct(
         private MailerInterface $mailer,
         private NotifierInterface $notifier,

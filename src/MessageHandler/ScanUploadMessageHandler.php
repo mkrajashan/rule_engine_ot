@@ -14,6 +14,12 @@ use Symfony\Component\Mime\Part\DataPart;
 use App\Service\RuleEvaluator;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Symfony Messenger handler for ScanUploadMessage.
+ * Triggers the actual scan on Debricked using the ciUploadId.
+ *
+ * @package App\MessageHandler
+ */
 #[AsMessageHandler]
 class ScanUploadMessageHandler
 {

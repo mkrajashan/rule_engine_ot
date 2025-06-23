@@ -16,6 +16,12 @@ use Symfony\Component\Mime\Part\DataPart;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Handles the uploading of dependency files to Debricked's API
+ * and dispatches scan initiation messages via Symfony Messenger.
+ *
+ * @package App\Service
+ */
 class DebrickedUploader
 {
     private const API_URL = 'https://debricked.com/api/1.0/open/';
