@@ -18,8 +18,8 @@ A **Dockerized Laravel REST API** for an Event Booking System, supporting:
 ### 1. Clone & Setup
 
 ```bash
-git clone https://github.com/mkrajashan/rule-engine.git
-cd rule_engine
+git clone https://github.com/mkrajashan/rule_engine_ot.git
+cd rule_engine_ot
 docker-compose up -d --build
 ./run-tests.sh
 ```
