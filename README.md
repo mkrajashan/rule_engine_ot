@@ -49,8 +49,6 @@ Run test cases (this will refresh the DB):
 
 ## ✅ Code Analyzer
 
-Run test cases (this will refresh the DB):
-
 ```bash
 composer phpstan
 ```
