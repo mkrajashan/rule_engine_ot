@@ -54,7 +54,15 @@ composer phpstan
 ```
 
 ---
+---
 
+## ✅ CI/CD Pipeline has been integrted on .Github/Workflows
+
+```bash
+.github/workflows/ci.yml
+```
+
+---
 ## 🧪 API Usage (Step-by-Step)
 
 > **Note:** Use the Debricked useremail and password to get the token
