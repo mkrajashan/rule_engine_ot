@@ -46,6 +46,16 @@ Run test cases (this will refresh the DB):
 
 ---
 
+## ✅ Code Analyzer
+
+Run test cases (this will refresh the DB):
+
+```bash
+composer phpstan
+```
+
+---
+
 ## 🧪 API Usage (Step-by-Step)
 
 > **Note:** Use the Debricked useremail and password to get the token
@@ -95,4 +105,8 @@ mysql -u root -p
 ```
 ---
 
-> **Note:**  Need to update the SLACK_DSN value from .env file SLACK_API_TOKEN=REDACTED_OR_USE_ENV_VAR TO SLACK_DSN=slack://xoxb-9080292692004-9079353084357-st6m4qQ10X1HyZXODIpCT6CU@default?channel=all-ot
+> **Note:**  
+```text
+update this value SLACK_API_TOKEN=REDACTED_OR_USE_ENV_VAR to SLACK_DSN=slack://TOKEAN@default?channel=CHANNEL
+```
+
