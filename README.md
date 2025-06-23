@@ -61,18 +61,6 @@ email: mukilmani7@gmail.com
 password: mani@123
 ```
 
----
-
-### 2. 🔓 Login
-
-- **Endpoint:** `POST /api/login`
-- **Form Data:**
-
-```text
-email: mani@mani.com
-password: mani@12345
-```
-
 - **Response:**
 
 ```Sample json
@@ -86,19 +74,18 @@ password: mani@12345
 #### 3. File Upload API
 
 - **POST http://localhost:8888/api/upload
-
+```text
+1.Set method to POST
+2.Set URL to your upload endpoint (e.g. http://localhost:8000/api/upload)
+3.In the Body, choose form-data
+4.Use key as files[], type as File, and attach files.
+5.You can add multiple entries with key files[] to upload multiple files.
+```
+- **Response:**
 ```json
-Set method to POST
-Set URL to your upload endpoint (e.g. http://localhost:8000/api/upload)
-In the Body, choose form-data
-Use key as files[], type as File, and attach files.
-You can add multiple entries with key files[] to upload multiple files.
-
 {"status":"success","data":"completed"}
 ```
-
 ---
-
 ## 🛠 PHPMyAdmin
 
 ```bash
@@ -107,3 +94,5 @@ mysql -u root -p
 # password: docker
 ```
 ---
+
+> **Note:**  Need to update the SLACK_DSN value from .env file SLACK_API_TOKEN=REDACTED_OR_USE_ENV_VAR TO SLACK_DSN=slack://xoxb-9080292692004-9079353084357-st6m4qQ10X1HyZXODIpCT6CU@default?channel=all-ot
