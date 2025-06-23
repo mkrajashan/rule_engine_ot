@@ -107,6 +107,6 @@ mysql -u root -p
 
 > **Note:**  
 ```text
-update this value SLACK_API_TOKEN=REDACTED_OR_USE_ENV_VAR to SLACK_DSN=TOKEN@default?channel=CHANNEL
+update this value slack dsn with the real credentials
 ```
 
