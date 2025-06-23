@@ -2,7 +2,7 @@
 # Simple Rule Engine
 
 
-A **Dockerized Laravel REST API** for an Event Booking System, supporting:
+A **Dockerized Symfony REST API**
 
 - **Authentication**: Get the access token
 - **Upload**: 
