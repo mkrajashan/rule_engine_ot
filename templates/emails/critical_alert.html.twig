@@ -1,0 +1,10 @@
+{# templates/emails/critical_alert.html.twig #}
+<h1>Critical Security Alert</h1>
+<p>Scan found <strong style="color: red;">{{ vulnCount }} vulnerabilities</strong>!</p>
+
+<p>Please review immediately:</p>
+<ul>
+    <li>Filename: {{ upload.filename }}</li>
+    <li>Upload ID: {{ upload.id }}</li>
+    <li>Scan Date: {{ upload.uploadedAt|date('Y-m-d H:i') }}</li>
+</ul>

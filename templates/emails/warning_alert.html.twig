@@ -1,0 +1,9 @@
+{# templates/emails/warning_alert.html.twig #}
+<h1>Security Warning</h1>
+<p>Scan found {{ vulnCount }} vulnerabilities.</p>
+
+<p>Details:</p>
+<ul>
+    <li>Filename: {{ upload.filename }}</li>
+    <li>Upload ID: {{ upload.id }}</li>
+</ul>

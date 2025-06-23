@@ -1,28 +1,109 @@
-## Introduction
-This a base for Debricked's backend home task. It provides a Symfony skeleton and a Docker environment with a few handy 
-services:
 
-- RabbitMQ
-- MySQL (available locally at 3307, between Docker services at 3306)
-- MailHog (UI available locally at 8025)
-- PHP
-- Nginx (available locally at 8888, your API endpoints will accessible through here)
+# Simple Rule Engine
 
-See .env for working credentials for RabbitMQ, MySQL and MailHog.
 
-A few notes:
-- By default, emails sent through Symfony Mailer will be sent to MailHog, regardless of recipient.
+A **Dockerized Laravel REST API** for an Event Booking System, supporting:
 
-## How to use the Docker environment
-### Starting the environment
-`docker compose up`
+- **Authentication**: Get the access token
+- **Upload**: 
+    Dependency File upload 
+    Dependency File Queuse and send for scan
+    Once Scan has been complete trigger the Rules & Action Defined on the Message Bus
+    Send Notification to the User ( Mail/ Slack ) -> Using Notifier service, any notification channel can be added
 
-### Stopping the environment
-`docker compose down`
+---
 
-### Running PHP based commands
-You can access the PHP environment's shell by executing `docker compose exec php bash` (make sure the environment is up 
-and running before, or the command will fail) in root folder.
+## 🚀 Quick Start
 
-We recommend that you always use the PHP container's shell whenever you execute PHP, such as when installing and 
-requiring new composer dependencies.
+### 1. Clone & Setup
+
+```bash
+git clone https://github.com/mkrajashan/rule-engine.git
+cd rule_engine
+docker-compose up -d --build
+./run-tests.sh
+```
+
+### 2. Clear & Migrate
+
+```bash
+docker exec -it rule_engine-php-1 bash
+php bin/console doctrine:schema:drop --force
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+php bin/console cache:clear --env=dev
+```
+
+---
+
+## ✅ Testing
+
+Run test cases (this will refresh the DB):
+
+```bash
+./run-tests.sh
+```
+
+---
+
+## 🧪 API Usage (Step-by-Step)
+
+> **Note:** Use the Debricked useremail and password to get the token
+
+### 1. 🔐 Authentication (Required)
+
+- **Endpoint:** `POST http://localhost:8888/api/login-check`
+- **Headers:** `Accept: application/json`
+- **Form Data:**
+
+```text
+email: mukilmani7@gmail.com
+password: mani@123
+```
+
+---
+
+### 2. 🔓 Login
+
+- **Endpoint:** `POST /api/login`
+- **Form Data:**
+
+```text
+email: mani@mani.com
+password: mani@12345
+```
+
+- **Response:**
+
+```Sample json
+{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3NTA2ODIyMDcsImV4cCI6MTc1MDY4NTgwNywicm9sZXMiOlsiUk9MRV9SRVBPU0lUT1JZX0FETUlOIiwiUk9MRV9DT01QQU5ZX0FETUlOIiwiUk9MRV9VU0VSIl0sImVtYWlsIjoibXVraWxtYW5pNzlAZ21haWwuY29tIn0.lHUGI_WexZZx65TDeHXq-J4RfbbVcM4pbKlr7Fhpzs7zvRmoy1RbbMpUnP3tcbc9ayqV3UlYs2xBW2OSk0K-bDmC_Nl63Gmh59iMshEWkAY5I0UNHFok8ixmpprPBZGzWmmIhDrcNfZGfoXbYcMpAqfa2JXs3Uq9-m2mNsLBVGefEl6dwbsQMHnKxPAsa2vrugn-P4TtjgvwpVM4bs9Ab9zgt8Mb6B_hJp5Zdcpn1ObPqYLyhQqrUjczZNQnhIBU54lhim93WckPOvI228k4N0jHrmJqdPGjhnOIZP5SqURDX0pVRMDiv1xlpnAMi_VcF3eham5SPkBUhuHf7cUFEOLtCDzuOC628daK1IsvB7cp7qPekM2DL7b1ReQvBlqXb5j-vU4i9lCPibIObxsxNsUsOPqc_-kWSW9_ByBnoncgAuuoDS66oAFhVCA4JPZPc7wDiXo2_Zv2snLnSBgKDz9ch3l6dYK007uyXcq5CVa86fLcYS5f6MOcUsqvqY4fnuZkJFkVjGmumukuLTFBH1VzjNQEOK4UG8Lle2R1KuJNkYgYw8IX3zYJFpPTSGpweeia9OI2-nVrfQwyqwa8BeoeOBMFWGUs9TSq3jtdMtAdqkrpMDGdeqNWkKqcAuQvElBUZPw6LZDX_JtZ8c_DUOOgw4r9ka87m22V-0_63Kw","status":200}
+```
+
+> **Note:** This token will be set default to the ENV['DEBRICKED_API_TOKEN'] file for the later use. No need to copy & send for the remaining API Access.
+
+---
+
+#### 3. File Upload API
+
+- **POST http://localhost:8888/api/upload
+
+```json
+Set method to POST
+Set URL to your upload endpoint (e.g. http://localhost:8000/api/upload)
+In the Body, choose form-data
+Use key as files[], type as File, and attach files.
+You can add multiple entries with key files[] to upload multiple files.
+
+{"status":"success","data":"completed"}
+```
+
+---
+
+## 🛠 PHPMyAdmin
+
+```bash
+docker exec -it rule_engine-database-1 bash
+mysql -u root -p
+# password: docker
+```
+---

@@ -23,6 +23,7 @@ networks:
 
 services:
     mailhog:
+        platform: linux/amd64
         image: mailhog/mailhog:v1.0.1
         ports:
             - "1025:1025"
@@ -30,7 +31,7 @@ services:
         networks:
             - backend
 
-    db:
+    database:
         platform: linux/amd64
         image: mysql:8.0
         ports:
@@ -39,11 +40,13 @@ services:
             - database_data_new:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: docker
+            MYSQL_DATABASE: rule_engine
         restart: on-failure
         networks:
             - backend
 
     rabbitmq:
+        platform: linux/amd64
         image: rabbitmq:3.9-management-alpine
         environment:
             RABBITMQ_ERLANG_COOKIE: rabbitmqcookie
@@ -61,6 +64,7 @@ services:
             - "15672:15672"
 
     php:
+        platform: linux/amd64
         image: ghcr.io/debricked/docker-image-php-xdebug:latest
         environment:
             # Reference https://gist.github.com/jehaby/61a89b15571b4bceee2417106e80240d
@@ -81,7 +85,7 @@ services:
         volumes:
             - ./:/var/www/html
         depends_on:
-            - db
+            - database
             - rabbitmq
             - mailhog
         entrypoint:
@@ -96,6 +100,7 @@ services:
             - backend
 
     nginx:
+        platform: linux/amd64
         image: nginx:latest
         environment:
             # Exposes the host Blackfire IDs and tokens environment variables.
@@ -117,4 +122,12 @@ services:
         networks:
             - backend
             - frontend
-
+    app:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        volumes:
+            - .:/var/www/html
+        working_dir: /var/www/html
+        command: tail -f /dev/null
+    
