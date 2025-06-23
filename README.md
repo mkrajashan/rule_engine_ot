@@ -8,7 +8,7 @@ A **Dockerized Symfony REST API**
 - **Upload**: 
 ```text
     Dependency File upload 
-    Dependency File Queuse and send for scan
+    Add Dependency File into Queue and send for scan
     Once Scan has been complete trigger the Rules & Action Defined on the Message Bus
     Send Notification to the User ( Mail/ Slack ) -> Using Notifier service, any notification channel can be added
 ```
