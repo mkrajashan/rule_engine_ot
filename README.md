@@ -7,6 +7,7 @@ A **Dockerized Symfony REST API**
 - **Authentication**: Get the access token
 - **Upload**: 
 ```text
+    Implemented Debricked authenticaion by consuming https://debricked.com/api/login_check
     Dependency File upload 
     Add Dependency File into Queue and send for scan
     Implemented Symfony Messenger allows to dispatch and consume messages asynchronously, enabling background processing of tasks. The process involves dispatching a message, which is then routed to a configured transport (like a queue), and finally consumed by a worker that executes the corresponding handler. 
