@@ -116,6 +116,6 @@ mysql -u root -p
 
 > **Note:**  
 ```text
-update this value slack dsn with the real credentials
+update the value slack dsn with the real credentials in .env file (SLACK_DSN)
 ```
 
